@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية</title>
+     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #111;
+            color: white;
+        }
+header {
+            background-color: #222;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        header .logo h1 {
+            font-size: 20px;
+            color: #fff;
+            flex: 1;
+            text-align: center;
+        }
+
+        /* أيقونة البحث */
+        header .search {
+            font-size: 35px !important;
+            color: #1e90ff; /* أزرق فاتح */
+            cursor: pointer;
+        }
+
+        /* أيقونة القائمة */
+        header .menu {
+            font-size: 40px !important;
+            color: red !important; /* الأحمر */
+            cursor: pointer;
+        }
+        .slider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 20px;
+            background-color: #222;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        .slider .image {
+            background-image: url('movie_image.jpg'); /* Replace with your movie image URL */
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .slider .content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            max-width: 500px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        .slider .content h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #ffdb58; /* Gold color for title */
+        }
+
+        .slider .content p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .slider .content .rating {
+            font-size: 18px;
+            color: #ffdb58;
+        }
+
+        .slider .content .duration {
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .slider .content .next {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1e90ff;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slider .content .next span {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between; /* محاذاة العناصر على نفس السطر مع مسافة بينهما */
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .section-title h2 {
+            font-size: 22px;
+            color: #fff;
+        }
+
+        .more-button {
+            font-size: 18px; /* تصغير حجم النص */
+            color: #1e90ff; /* نفس اللون الأزرق الفاتح كما في أيقونة البحث */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .more-button span {
+            margin-left: 5px; /* المسافة بين السهم وكلمة "المزيد" */
+            font-size: 20px; /* تصغير حجم الأيقونة */
+        }
+
+        .movies-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: scroll;
+            direction: rtl; /* تغيير اتجاه السلايد ليكون من اليمين لليسار */
+        }
+
+        .movie-card {
+            background-color: #333;
+            width: 150px;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .movie-card h3 {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #fff;
+        }
+
+        .movie-card p {
+            font-size: 14px;
+            margin: 5px 0;
+            color: #fff;
+        }
+
+        .movie-card p:nth-child(2) {
+            color: #ffdb58; /* Yellow for ratings */
+        }
+
+        footer {
+            background-color: #222;
+            padding: 10px;
+            text-align: center;
+        }
+
+        footer ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        footer ul li {
+            cursor: pointer;
+            color: #fff;
+        }
+
+        /* شريط التنقل في الأسفل */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #222;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #444;
+        }
+
+        .bottom-nav a {
+            text-align: center;
+            color: #1e90ff;
+            text-decoration: none;
+        }
+
+        .bottom-nav .material-icons {
+            font-size: 30px;
+            color: #1e90ff;
+        }
+
+        .bottom-nav span {
+            display: block;
+            font-size: 12px;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+        <div class="search">
+            <span class="material-icons">search</span>
+        </div>
+
+        <!-- عنوان "الصفحة الرئيسية" في المنتصف -->
+        <div class="logo">
+            <h1>الصفحة الرئيسية</h1>
+        </div>
+
+        <!-- أيقونة الثلاث شرطات على اليمين -->
+        <div class="menu">
+            <span class="material-icons">menu</span>
+        </div>
+    </header>
+    <!-- سلايد "أفلام موصى بها" -->
+    <section class="recommended-movies">
+        <div class="section-title">
+            <div class="more-button">
+                <span class="material-icons">keyboard_arrow_left</span>
+                <span>المزيد</span>
+            </div>
+            <h2>أفلام موصى بها</h2>
+        </div>
+        <div class="movies-container">
+            <div class="movie-card">
+                <img src="movie1.jpg" alt="Mission Impossible">
+                <h3>Mission Impossible</h3>
+                <p>المدة: 2h 30m</p>
+                <p>التقييم: 7.6</p>
+            </div>
+            <div class="movie-card">
+                <img src="movie2.jpg" alt="Avatar">
+                <h3>Avatar</h3>
+                <p>المدة: 3h 12m</p>
+                <p>التقييم: 7.7</p>
+            </div>
+            <div class="movie-card">
+                <img src="movie3.jpg" alt="Oppenheimer">
+                <h3>Oppenheimer</h3>
+                <p>المدة: 2h 30m</p>
+                <p>التقييم: 8.4</p>
+            </div>
+        </div>
+    </section>
+
+  <section class="latest-movies">
+        <div class="section-title">
+            <div class="more-button">
+                <span class="material-icons">keyboard_arrow_left</span>
+                <span>المزيد</span>
+            </div>
+            <h2>أحدث الأفلام المضافة</h2>
+        </div>
+        <div class="movies-container">
+            <div class="movie-card">
+                <img src="movie4.jpg" alt="Dune">
+                <h3>Dune</h3>
+                <p>المدة: 2h 35m</p>
+                <p>التقييم: 8.0</p>
+            </div>
+            <div class="movie-card">
+                <img src="movie5.jpg" alt="Spider-Man">
+                <h3>Spider-Man</h3>
+                <p>المدة: 2h 10m</p>
+                <p>التقييم: 8.3</p>
+            </div>
+            <div class="movie-card">
+                <img src="movie6.jpg" alt="The Matrix">
+                <h3>The Matrix</h3>
+                <p>المدة: 2h 15m</p>
+                <p>التقييم: 9.0</p>
+            </div>
+        </div>
+    </section>
+    <!-- سلايد "The Batman" مع صورة الخلفية والتفاصيل -->
+    <div class="slider">
+        <div class="image" style="background-image: url('batman_image.jpg');"></div>
+        <div class="content">
+            <h2>The Batman 2022</h2>
+            <p>خلاصة القصة: بعض من قصة سالف الماضي مع جوهر من جديد، وحياة جديدة له... يكتشف أن القتال مع الفوضى لا يعدو كونه مصيرًا...</p>
+            <div class="rating">التقييم: 6.7</div>
+            <div class="duration">المدة: 2h 27m</div>
+            <div class="next">
+                <span class="material-icons">keyboard_arrow_right</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- سلايد "أحدث الأفلام المضافة" -->
+  <section class="latest-movies">
+        <div class="section-title">
+            <div class="more-button">
+                <span class="material-icons">keyboard_arrow_left</span>
+                <span>المزيد</span>
+            </div>
+            <h2>أحدث الأفلام المضافة</h2>
+        </div>
+        <div class="movies-container">
+            <div class="movie-card">
+                <img src="movie4.jpg" alt="Dune">
+                <h3>Dune</h3>
+                <p>المدة: 2h 35m</p>
+                <p>التقييم: 8.0</p>
+            </div>
+            <div class="movie-card">
+                <img src="movie5.jpg" alt="Spider-Man">
+                <h3>Spider-Man</h3>
+                <p>المدة: 2h 10m</p>
+                <p>التقييم: 8.3</p>
+            </div>
+            <div class="movie-card">
+                <img src="movie6.jpg" alt="The Matrix">
+                <h3>The Matrix</h3>
+                <p>المدة: 2h 15m</p>
+                <p>التقييم: 9.0</p>
+            </div>
+        </div>
+    </section>
+  
+    <div class="slider">
+        <div class="image" style="background-image: url('batman_image.jpg');"></div>
+        <div class="content">
+            <h2>The Batman 2022</h2>
+            <p>خلاصة القصة: بعض من قصة سالف الماضي مع جوهر من جديد، وحياة جديدة له... يكتشف أن القتال مع الفوضى لا يعدو كونه مصيرًا...</p>
+            <div class="rating">التقييم: 6.7</div>
+            <div class="duration">المدة: 2h 27m</div>
+            <div class="next">
+                <span class="material-icons">keyboard_arrow_right</span>
+            </div>
+        </div>
+    </div>
+
+  <section class="latest-movies">
+        <div class="section-title">
+            <div class="more-button">
+                <span class="material-icons">keyboard_arrow_left</span>
+                <span>المزيد</span>
+            </div>
+            <h2>أحدث الأفلام المضافة</h2>
+        </div>
+        <div class="movies-container">
+            <div class="movie-card">
+                <img src="movie4.jpg" alt="Dune">
+                <h3>Dune</h3>
+                <p>المدة: 2h 35m</p>
+                <p>التقييم: 8.0</p>
+            </div>
+            <div class="movie-card">
+                <img src="movie5.jpg" alt="Spider-Man">
+                <h3>Spider-Man</h3>
+                <p>المدة: 2h 10m</p>
+                <p>التقييم: 8.3</p>
+            </div>
+            <div class="movie-card">
+                <img src="movie6.jpg" alt="The Matrix">
+                <h3>The Matrix</h3>
+                <p>المدة: 2h 15m</p>
+                <p>التقييم: 9.0</p>
+            </div>
+        </div>
+    </section>
+
+  <section class="latest-movies">
+        <div class="section-title">
+            <div class="more-button">
+                <span class="material-icons">keyboard_arrow_left</span>
+                <span>المزيد</span>
+            </div>
+            <h2>أحدث الأفلام المضافة</h2>
+        </div>
+        <div class="movies-container">
+            <div class="movie-card">
+                <img src="movie4.jpg" alt="Dune">
+                <h3>Dune</h3>
+                <p>المدة: 2h 35m</p>
+                <p>التقييم: 8.0</p>
+            </div>
+            <div class="movie-card">
+                <img src="movie5.jpg" alt="Spider-Man">
+                <h3>Spider-Man</h3>
+                <p>المدة: 2h 10m</p>
+                <p>التقييم: 8.3</p>
+            </div>
+            <div class="movie-card">
+                <img src="movie6.jpg" alt="The Matrix">
+                <h3>The Matrix</h3>
+                <p>المدة: 2h 15m</p>
+                <p>التقييم: 9.0</p>
+            </div>
+        </div>
+    </section>
+
+  <section class="latest-movies">
+        <div class="section-title">
+            <div class="more-button">
+                <span class="material-icons">keyboard_arrow_left</span>
+                <span>المزيد</span>
+            </div>
+            <h2>أحدث الأفلام المضافة</h2>
+        </div>
+        <div class="movies-container">
+            <div class="movie-card">
+                <img src="movie4.jpg" alt="Dune">
+                <h3>Dune</h3>
+                <p>المدة: 2h 35m</p>
+                <p>التقييم: 8.0</p>
+            </div>
+            <div class="movie-card">
+                <img src="movie5.jpg" alt="Spider-Man">
+                <h3>Spider-Man</h3>
+                <p>المدة: 2h 10m</p>
+                <p>التقييم: 8.3</p>
+            </div>
+            <div class="movie-card">
+                <img src="movie6.jpg" alt="The Matrix">
+                <h3>The Matrix</h3>
+                <p>المدة: 2h 15m</p>
+                <p>التقييم: 9.0</p>
+            </div>
+        </div>
+    </section>
+    <!-- شريط التنقل في أسفل الصفحة -->
+    <div class="bottom-nav">
+        <a href="#">
+            <span class="material-icons">account_circle</span>
+            <span>حسابي</span>
+        </a>
+        <a href="#">
+            <span class="material-icons">bookmark</span>
+            <span>المفضلة</span>
+        </a>
+        <a href="#">
+            <span class="material-icons">search</span>
+            <span>البحث</span>
+        </a>
+        <a href="#">
+            <span class="material-icons">home</span>
+            <span>الصفحة الرئيسية</span>
+        </a>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <ul>
+                <li>حسابي</li>
+                <li>البحث</li>
+                <li>إعدادات</li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+</html>
