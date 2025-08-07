@@ -145,8 +145,11 @@ header {
         .movies-container {
             display: flex;
             gap: 15px;
-            overflow-x: hidden;
+            overflow-x: auto;
             direction: rtl; /* تغيير اتجاه السلايد ليكون من اليمين لليسار */
+       scrollbar-width: none;
+            -ms-overflow-style: none;
+            
         }
 
         .movie-card {
@@ -232,6 +235,9 @@ header {
        section.latest-movies, section.recommended-movies {
        margin-top: 40px;
         }
+       .movies-container::-webkit-scrollbar {
+           display: none;
+       }
     </style>
 </head>
 <body>
